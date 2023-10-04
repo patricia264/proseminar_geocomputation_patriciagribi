@@ -1,0 +1,78 @@
+---
+title: "Project Proposal"
+author: "Patricia Gribi"
+date: "2023-10-02"
+output: html_document
+---
+
+# Project Idea Research
+
+https://geco-bern.github.io/agds_proseminar/project_ideas.html
+
+Topics: 
+
+- Homogenized time series of global mean CO2 and temperature, from the Pleistocene to 2100.
+datasets: Mauna Loa CO2 trends, Corrected EPICA Dome C CO2 record (Bereiter et al. 2015), RCP standard forcing
+
+- Trends in the longest rain-free period per year, in a specific location
+datasets: rnoaa R package, MeteoSchweiz online GUI
+
+- Patterns in irrigation areas and land surface temperature
+datasets: Global map of Irrigation Areas, Global Land Surface Temperature (IDCD)
+
+
+
+Look at the data:
+
+
+Write a proposal
+
+requirements: 
+- summary: main ideas of project, how solve questions
+- background and motivation: why important, what is known, what unknown
+- objective
+- implementation
+- responsabilities and timeline
+- risks and contingency
+- impact
+
+
+
+# Research Question and Hypothesis
+
+
+Choose a specific research question or hypothesis related to geography that you want to investigate. This question should be something that can be answered using available data.
+
+
+# Datasets
+
+
+Identify and collect open datasets that are relevant to your research question. Ensure that you have permission to use these datasets for your analysis.
+
+
+# Data Exploration
+
+Explore the selected datasets to get a sense of the data's structure, variables, and quality. Check for any missing or erroneous data that may need to be cleaned.
+
+
+# Data Cleaning and Preprocessing
+
+Prepare the data for analysis by cleaning and transforming it as needed. This may include handling missing values, standardizing units, and merging datasets if multiple data sources are used.
+
+
+# Data Analysis and Visualization
+
+Apply statistical and data visualization techniques to analyze the data. Use appropriate tools and libraries (e.g., Python with libraries like pandas, matplotlib, and seaborn) to create visualizations that reveal patterns, relationships, trends, or differences.
+
+
+# Hypothesis Testing (if applicable):
+
+If your research question involves hypothesis testing, perform the necessary statistical tests to validate or reject your hypotheses.
+
+
+# Interpretation and Conclusion:
+
+Interpret the results of your analysis in the context of your research question. Discuss the implications and significance of your findings. Address what is known and what remains unknown in the field.
+
+
+
