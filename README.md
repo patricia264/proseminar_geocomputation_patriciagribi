@@ -18,18 +18,16 @@ variables.
 
 ## Background and Motivation
 
-Why is your project important? What is known and unknown?
+The importance of my research project lies in its relevance to the ongoing and intensifying 
+debate surrounding climate change. As we approach the limits set by the Paris Agreement, 
+understanding the likely scenarios that we are heading toward becomes increasingly crucial.
 
-Why important: current climate debate, climate change, future scenarios,
+The fluctuations between glacial and interglacial periods, the varying levels of CO2 in the 
+atmosphere, and the significant recent increase in CO2 concentrations resulting from 
+anthropogenic activities are all well-established facts among the big majority of scientists. 
 
-this is known: glacial and interglacial periods, co2 amount in the
-atmosphere varies, in the last century there has been a strong increase
-in co2 levels due to anthropogenic activities, the amount of co2 in the
-atmosphere correlates with the temperature -- the average global
-temperature is rising.
-
-this is unkown: overall uncertainty of paleo-based estimates of climate
-sensitivity
+he overall uncertainty surrounding paleo-based estimates of climate sensitivity remains a 
+topic of uncertainty and ongoing research in the field of climate science.
 
 
 ## Objective
@@ -76,11 +74,9 @@ be important to maintain a constant dialogue with the tutors and to ask question
 
 ## Impact
 
-How will your results answer unknowns? What are the expected scientific
-and societal impacts? - Expected scientific impact(s): e.g. contributing
-to specific scientific advances, across and within disciplines,
-reinforcing research infrastructures (databases, equipment, and
-instruments) - Expected societal impact(s): e.g. improving policies and
-decision-making, providing guidance for sustainable management, raising
-consumer awareness. Only include such impacts where your project would
-make a direct contribution.
+My research project aims to contribute to our understanding of the relationship
+between CO2 levels and temperature changes on Earth and their impact on climate
+change and hence on our lives.
+
+In my local community, I hope to raise awareness about the issue of climate change 
+to make people more concerned about this topic and may change some opinions about it.
