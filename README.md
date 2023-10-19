@@ -47,13 +47,21 @@ machine learning method will be used, introduced in the course AGDS I.
 ## Timeline
 
 Session 6 (25.10.) : Final proposal and Data Research 
+
 Session 7 (01.11.) : Tidy data 
+
 Session 8 (08.11.) : Visualize data 
+
 Session 9 (15.11.) : Data Analysis 
+
 Session 10 (22.11) : Data Analysis 
+
 Session 11 (29.11) : Writing report, Interpretation and Conclusion
+
 Session 12 (06.12) : Make corrections, layout
+
 Session 13 (13.12) : Create Presentation, Finish report
+
 Session 14 (20.12) : Presentation, Report Submission
 
 
