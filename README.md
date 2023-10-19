@@ -1,7 +1,7 @@
 # proseminar_geocomputation_patriciagribi
 
 
-# Summary
+## Summary
 
 This research project aims to reconstruct a time series of global mean
 CO2 and temperature data, from the Pleistocene to 2100. 
@@ -16,7 +16,7 @@ by considering different temperature and CO2 values and other potentially influe
 variables.
 
 
-# Background and Motivation
+## Background and Motivation
 
 Why is your project important? What is known and unknown?
 
@@ -32,7 +32,7 @@ this is unkown: overall uncertainty of paleo-based estimates of climate
 sensitivity
 
 
-# Objective
+## Objective
 
 The primary goal of this project is to reconstruct a time series of global mean
 CO2 and temperature data, from the Pleistocene to the year 2100. 
@@ -40,52 +40,41 @@ From this basis the following questions should be answered:
 Which CO2 and temperature scenario is most likely to occur? And on what grounds?
 
 
-# Implementation
+## Implementation
 
-What approach will you take to achieve the goal in terms of data and
-methods?
-
--look at agds and chatgpt
+To model the data and complete different future scenarios the supervised
+machine learning method will be used, introduced in the course AGDS I. 
 
 
-# Datasources
+## Timeline
 
--   Mauna Loa CO2 trends: Globally averaged marine surface annual mean
-    data, from 1979 until 2022, in ppm
--   Corrected EPICA Dome CO2 record: 3 diff. methods to extract air
-    trapped in ice-cores to measure co2 content,
--   RCP standard forcing: Representative Concentration Pathways (RCPs),
-    different regions and scenarios,
-    <https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download>
-
-
-# Responsibilities and timeline
-
-Session 6 (25.10.): Final proposal and Data Research 
-Session 7 (01.11.): Tidy data 
+Session 6 (25.10.) : Final proposal and Data Research 
+Session 7 (01.11.) : Tidy data 
 Session 8 (08.11.) : Visualize data 
-Session 9 (15.11.) : Visualize data 
-Session 10 (22.11) : Analysis 
-Session 11 (29.11) : Analysis 
-    Session 12 (06.12) : Writing report, Interpretation and
-    Conclusion Session 13 (13.12) : Create Presentation, Finish report
-    Session 14 (20.12) : Presentations. Report-Abgabe.
-    
-    more details, gantt chart
+Session 9 (15.11.) : Data Analysis 
+Session 10 (22.11) : Data Analysis 
+Session 11 (29.11) : Writing report, Interpretation and Conclusion
+Session 12 (06.12) : Make corrections, layout
+Session 13 (13.12) : Create Presentation, Finish report
+Session 14 (20.12) : Presentation, Report Submission
 
-# Risks and contingency
 
-What risks and challenges do you expect and what will you do to address
-them?
+## Risks and contingency
 
-Expected risks: incomplete data, the whole data wrangling and data
-cleaning process to have tidy data in the end, as the data come from
-different sources, with diff. variables, layouts...,
+Expected risks in this project include dealing with incomplete data. This
+issue will be adressed by modelling missing data.
 
-challenges: to know how much to go deep with my analyses, to actually
-find out what exactly to do
+The data will come in different formats, layouts and with probably NA values and 
+probably also more variables than needed. The challenges ahead involves the entire
+data wrangling and data cleaning process, which is necessary to ensure that the data 
+is tidy by the end of the process. 
 
-# Impact
+Furthermore, it'll be difficult to determine how deeply to analyze the data to make
+meaningful conclusions and share interesting findings. To target this issue, it'll
+be important to maintain a constant dialogue with the tutors and to ask questions.
+
+
+## Impact
 
 How will your results answer unknowns? What are the expected scientific
 and societal impacts? - Expected scientific impact(s): e.g. contributing
