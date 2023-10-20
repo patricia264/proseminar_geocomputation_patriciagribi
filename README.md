@@ -24,10 +24,12 @@ understanding the likely scenarios that we are heading toward becomes increasing
 
 The fluctuations between glacial and interglacial periods, the varying levels of CO2 in the 
 atmosphere, and the significant recent increase in CO2 concentrations resulting from 
-anthropogenic activities are all well-established facts among the big majority of scientists. 
+anthropogenic activities are all well-established facts among the big majority of scientists 
+[Farah 2019, S.321ff].
 
-he overall uncertainty surrounding paleo-based estimates of climate sensitivity remains a 
-topic of uncertainty and ongoing research in the field of climate science.
+The overall uncertainty surrounding paleo-based estimates of climate sensitivity remains a 
+topic of uncertainty and ongoing research in the field of climate science 
+[Friedrich u. Timmermann 2019, S.1].
 
 
 ## Objective
@@ -88,3 +90,11 @@ change and hence on our lives.
 
 In my local community, I hope to raise awareness about the issue of climate change 
 to make people more concerned about this topic and may change some opinions about it.
+
+## Literature
+- Friedrich Tobias & Timmermann Axel (2019): Using Late Pleistocene sea surface temperature
+  reconstructions to constrain future greenhouse warming. In: Earth and Planetary Science
+  Letters, 2020, Vol. 530. DOI: https://doi.org/10.1016/j.epsl.2019.115911
+- Farah Yasmeen (2019): Measuring Global Warming: Global and Hemisphere Mean Temperature
+  Anomalies Predictions Using Sliced Functional Time Series (SFTS) Model. In: Open Journal
+  of Applied Scienes, 2019, 9, 316-334. DOI: https://doi.org/10.4236/ojapps.2019.95026
