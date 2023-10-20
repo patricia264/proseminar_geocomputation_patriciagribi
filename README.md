@@ -48,23 +48,23 @@ machine learning method will be used, introduced in the course AGDS I.
 
 ## Timeline
 
-Session 6 (25.10.) : Final proposal and Data Research 
+Session 6 (25.10.) : Final proposal and data research and loading in R 
 
-Session 7 (01.11.) : Tidy data 
+Session 7 (01.11.) : Tidy data (including modelling missing values)
 
-Session 8 (08.11.) : Visualize data 
+Session 8 (08.11.) : Visualization and description of the data 
 
-Session 9 (15.11.) : Data Analysis 
+Session 9 (15.11.) : Data analysis 
 
-Session 10 (22.11) : Data Analysis 
+Session 10 (22.11) : Modelling different future scenarios of CO2 and temperature with the supervised machine learning algorithm
 
-Session 11 (29.11) : Writing report, Interpretation and Conclusion
+Session 11 (29.11) : Writing obtained results, interesting aspects of the analysis, interpretation and conclusion
 
-Session 12 (06.12) : Make corrections, layout
+Session 12 (06.12) : Make corrections, check layout and citations
 
-Session 13 (13.12) : Create Presentation, Finish report
+Session 13 (13.12) : Create presentation, finish report
 
-Session 14 (20.12) : Presentation, Report Submission
+Session 14 (20.12) : Presentation, report submission
 
 
 ## Risks and contingency
