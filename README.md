@@ -56,6 +56,9 @@ xxxxxxxxxx
 
 ## Implementation
 
+variables of interest: CO2 and temperature over time
+
+
 For this research project the following datasets will be used:
 
 - Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
@@ -65,15 +68,22 @@ For this research project the following datasets will be used:
   data of different ice cores with different dephts. CO2 in ppm in it. EDC dome from 560-806 kyr
   (from 560'000 - 806'000 yrs).
 
-- RCP:
 
-  temperature data of this time?
+
+Furthermore datasets for temperature data and missing time-intervalls CO2 records will be needed.
+
+data selection: from the datasets take the co2 and temperature records over time, 
+to reconstruct time series from 608'000 years ago until 2100. 
+
+needed models: 
+
+What kind of visualisations do you want to use and how will they inform the questions in your objective?
   
 
 
 ## Timeline
 
-Session 6 (25.10.) : Final proposal and data research and loading in R 
+Session 6 (25.10.) : datasets collection 
 
 Session 7 (01.11.) : Tidy data (including modelling missing values)
 
