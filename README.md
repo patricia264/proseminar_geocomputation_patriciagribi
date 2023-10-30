@@ -47,11 +47,15 @@ The primary goal of this project is to homogenise and combine 3 different
 datasets together to form a time series of global mean CO2 and temperature data, 
 from the Pleistocene to the year 2100. 
 
-From this basis the following questions should be answered: 
+During the project the following questions should be answered: 
 
-xxxxxxx
-Which CO2 and temperature scenario is most likely to occur? And on what grounds?
-xxxxxxxxxx
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+How does the homogenization of heterogeneous temperature and CO2 data impact the 
+accuracy and reliability of long-term climate change assessments?
+
+Can the homogenization of historical temperature and CO2 data enhance our understanding 
+of the relationship between climate change and greenhouse gas emissions?
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 ## Implementation
@@ -83,23 +87,7 @@ What kind of visualisations do you want to use and how will they inform the ques
 
 ## Timeline
 
-Session 6 (25.10.) : datasets collection 
-
-Session 7 (01.11.) : Tidy data (including modelling missing values)
-
-Session 8 (08.11.) : Visualization and description of the data 
-
-Session 9 (15.11.) : Data analysis 
-
-Session 10 (22.11) : Modelling different future scenarios of CO2 and temperature with the supervised machine learning algorithm
-
-Session 11 (29.11) : Writing obtained results, interesting aspects of the analysis, interpretation and conclusion
-
-Session 12 (06.12) : Make corrections, check layout and citations
-
-Session 13 (13.12) : Create presentation, finish report
-
-Session 14 (20.12) : Presentation, report submission
+https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBvwMSsWogvxFbcQ99e9rVaQ?email=michele.baumann1%40students.unibe.ch&e=nE88yy 
 
 
 ## Risks and contingency
@@ -125,6 +113,13 @@ change and hence on our lives.
 
 In my local community, I hope to raise awareness about the issue of climate change 
 to make people more concerned about this topic and may change some opinions about it.
+
+
+## Questions
+
+- Research question.
+- Treering data correct? Where is the temperature in this data?
+- Still missing data gaps.
 
 
 ## Literature
