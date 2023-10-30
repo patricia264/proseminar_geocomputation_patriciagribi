@@ -87,7 +87,7 @@ What kind of visualisations do you want to use and how will they inform the ques
 
 ## Timeline
 
-https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBvwMSsWogvxFbcQ99e9rVaQ?email=michele.baumann1%40students.unibe.ch&e=nE88yy 
+https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBkxnasJgvCWbkGVYxlrmnnQ?e=PJTBhH 
 
 
 ## Risks and contingency
