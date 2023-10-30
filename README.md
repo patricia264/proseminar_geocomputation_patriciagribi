@@ -49,21 +49,17 @@ from the Pleistocene to the year 2100.
 
 During the project the following questions should be answered: 
 
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-How does the homogenization of heterogeneous temperature and CO2 data impact the 
+- How does the homogenization of heterogeneous temperature and CO2 data impact the 
 accuracy and reliability of long-term climate change assessments?
 
-Can the homogenization of historical temperature and CO2 data enhance our understanding 
+- Can the homogenization of historical temperature and CO2 data enhance our understanding 
 of the relationship between climate change and greenhouse gas emissions?
-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 ## Implementation
 
-variables of interest: CO2 and temperature over time
-
-
-For this research project the following datasets will be used:
+For the following project, the variables of interest are temperature and CO2 over time.
+These variables will be conducted from different datasets and therefore different sources:
 
 - Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
   CO2 data, from 1979 until 2022, in ppm
@@ -72,12 +68,15 @@ For this research project the following datasets will be used:
   data of different ice cores with different dephts. CO2 in ppm in it. EDC dome from 560-806 kyr
   (from 560'000 - 806'000 yrs).
 
-
-
 Furthermore datasets for temperature data and missing time-intervalls CO2 records will be needed.
 
-data selection: from the datasets take the co2 and temperature records over time, 
-to reconstruct time series from 608'000 years ago until 2100. 
+
+Include a discussion of what each dataset brings to your project and how you plan on analysing them. 
+
+
+The variables of interest (temperature and CO2) from the different datasets will then be combined
+together, forming a homogenised time-series from 608'000 years ago until the year 2'100. 
+
 
 needed models: 
 
