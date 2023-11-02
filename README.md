@@ -67,20 +67,14 @@ These variables will be conducted from different datasets and therefore differen
 - Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]:
   data of different ice cores with different dephts. CO2 in ppm in it. EDC dome from 560-806 kyr
   (from 560'000 - 806'000 yrs).
-
-Furthermore datasets for temperature data and missing time-intervalls CO2 records will be needed.
-
-
-Include a discussion of what each dataset brings to your project and how you plan on analysing them. 
+  
+- PAGES2k Common Era Surface Temperature Reconstructions [Neukom et al. 2019]: 2,000-year-long global
+  mean temperature reconstructions using seven different statistical methods that draw from a global
+  collection of temperature-sensitive palaeoclimate records.
 
 
 The variables of interest (temperature and CO2) from the different datasets will then be combined
 together, forming a homogenised time-series from 608'000 years ago until the year 2'100. 
-
-
-needed models: 
-
-What kind of visualisations do you want to use and how will they inform the questions in your objective?
   
 
 
@@ -114,13 +108,6 @@ In my local community, I hope to raise awareness about the issue of climate chan
 to make people more concerned about this topic and may change some opinions about it.
 
 
-## Questions
-
-- Research question.
-- Treering data correct? Where is the temperature in this data?
-- Still missing data gaps.
-
-
 ## Literature
 
 - Bereiter Bernhard, Eggleston Sarah, Schmitt Jochen, Nehrbass-Ahles Christoph, F. Stocker
@@ -135,3 +122,8 @@ to make people more concerned about this topic and may change some opinions abou
   of Applied Scienes, 2019, 9, 316-334. DOI: https://doi.org/10.4236/ojapps.2019.95026
 - Lan, X., Tans, P. and K.W. Thoning: Trends in globally-averaged CO2 determined from NOAA Global
   Monitoring Laboratory measurements. Version 2023-10. https://doi.org/10.15138/9N0H-ZH07
+- Neukom Raphael, Barboza Luis A., Erb Michael P., Shi Feng, Emile-Geay Julien, Evans Michael N.,
+  Franke Jörg, Kaufman Darrell S., Lücke Lucie, Rehfeld Kira, Schurer Andrew, Zhu Feng, Brönnimann Stefan,
+  Hakim Gregory J., Henley Benjamin J., Charpentier Ljungqvist Fredrik, McKay Nicholas, Valler Veronika,
+  von Gunten Lucien (2019): Consistent multidecadal variability in global temperature reconstructions and
+  simulations over the Common Era. In: Nature Geoscience, 12. PAGES2k Consortium. doi: 10.1038/s41561-019-0400-0
