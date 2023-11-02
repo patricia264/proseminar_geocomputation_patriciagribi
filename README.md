@@ -49,8 +49,8 @@ from the Pleistocene to the year 2100.
 
 During the project the following questions should be answered: 
 
-- Can the homogenization of historical temperature and CO2 data enhance our understanding 
-of the relationship between climate change and greenhouse gas emissions?
+- How does the homogenization of heterogeneous temperature and CO2 data impact the 
+accuracy and reliability of long-term climate change assessments?
 
 
 ## Implementation
@@ -62,17 +62,18 @@ These variables will be conducted from different datasets and therefore differen
   Temperature and elevation reconstructions for 7 Antarctic ice core locations for the past 40,000 years,
   based on Antarctic ice core borehole temperature and d15N.
 
-- Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]:
-  data of different ice cores with different dephts. CO2 in ppm in it. EDC dome from 560-806 kyr
-  (from 560'000 - 806'000 yrs).
+- Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]: Data of different ice cores ranging up until
+  800'000 years ago. CO2 in ppm.
 
 - Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
-  CO2 data, from 1979 until 2022, in ppm
+  CO2 data, from 1979 until 2022, in ppm.
+
+- NOAA National Centers for Environmental information, Climate at a Glance: Global Time Series (2023):
+  Temperature anomalies ranging from 1850-2022.
   
 - PAGES2k Common Era Surface Temperature Reconstructions [Neukom et al. 2019]: 2,000-year-long global
   mean temperature reconstructions using seven different statistical methods that draw from a global
   collection of temperature-sensitive palaeoclimate records.
-
 
 The variables of interest (temperature and CO2) from the different datasets will then be combined
 together, forming a homogenised time-series from 800'000 years ago until the year 2'100. 
@@ -143,3 +144,5 @@ to make people more concerned about this topic and may change some opinions abou
   Hakim Gregory J., Henley Benjamin J., Charpentier Ljungqvist Fredrik, McKay Nicholas, Valler Veronika,
   von Gunten Lucien (2019): Consistent multidecadal variability in global temperature reconstructions and
   simulations over the Common Era. In: Nature Geoscience, 12. PAGES2k Consortium. doi: 10.1038/s41561-019-0400-0
+- NOAA National Centers for Environmental information, Climate at a Glance: Global Time Series, published October 2023,
+  retrieved on November 2, 2023 from https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series 
