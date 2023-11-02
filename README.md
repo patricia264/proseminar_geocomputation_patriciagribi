@@ -4,10 +4,10 @@
 ## Summary
 
 This research project aims to homogenise a time series of global mean CO2 and temperature data, 
-from the Pleistocene to 2100, combining 3 different datasets. 
+from the Pleistocene to 2100, combining different datasets. 
 In a first step, data used for global mean CO2 concentration and temperature records will be 
 cleaned and described. In a further step the datasets will be combined together to form a continuous 
-timeline. This will require the homogenisation of the 3 different datasets, considering offsets on 
+timeline. This will require the homogenisation of the different datasets, considering offsets on 
 overlapping intervalls and the interpolation of missing datapoints. 
 
 The final step will be to take different models for a predicted scenario and then use ensemble techniques, 
@@ -49,9 +49,6 @@ from the Pleistocene to the year 2100.
 
 During the project the following questions should be answered: 
 
-- How does the homogenization of heterogeneous temperature and CO2 data impact the 
-accuracy and reliability of long-term climate change assessments?
-
 - Can the homogenization of historical temperature and CO2 data enhance our understanding 
 of the relationship between climate change and greenhouse gas emissions?
 
@@ -61,12 +58,16 @@ of the relationship between climate change and greenhouse gas emissions?
 For the following project, the variables of interest are temperature and CO2 over time.
 These variables will be conducted from different datasets and therefore different sources:
 
-- Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
-  CO2 data, from 1979 until 2022, in ppm
+- Antarctic surface temperature and elevation during the Last Glacial Maximum [Buizert et al. 2021]:
+  Temperature and elevation reconstructions for 7 Antarctic ice core locations for the past 40,000 years,
+  based on Antarctic ice core borehole temperature and d15N.
 
 - Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]:
   data of different ice cores with different dephts. CO2 in ppm in it. EDC dome from 560-806 kyr
   (from 560'000 - 806'000 yrs).
+
+- Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
+  CO2 data, from 1979 until 2022, in ppm
   
 - PAGES2k Common Era Surface Temperature Reconstructions [Neukom et al. 2019]: 2,000-year-long global
   mean temperature reconstructions using seven different statistical methods that draw from a global
@@ -74,8 +75,9 @@ These variables will be conducted from different datasets and therefore differen
 
 
 The variables of interest (temperature and CO2) from the different datasets will then be combined
-together, forming a homogenised time-series from 608'000 years ago until the year 2'100. 
+together, forming a homogenised time-series from 800'000 years ago until the year 2'100. 
   
+Link to the implementation section: 
 
 
 ## Timeline
@@ -84,6 +86,11 @@ https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_
 
 
 ## Risks and contingency
+
+The primary challenge lies in ensuring data integrity, specifically in finding diverse datasets with 
+overlapping time series. As of now temperature data spans over 40,000 years, while CO2 data stretches 
+back to 800,000 years. This issue needs to be adressed first. Furthermroe integrating future modelled CO2 
+and temperature data into the timeline.
 
 Expected risks in this project include dealing with incomplete data. This
 issue will be adressed by interpolating missing data.
@@ -114,6 +121,15 @@ to make people more concerned about this topic and may change some opinions abou
   Thomas, Fischer Hubertus, Kipfstuhl Sepp, Chappellaz Jerome (2014): Revision of the EPICA
   Dome C CO2 record from 800 to 600 kyr before present. In: Geophysical Research Letters, 2015,
   Vol. 42, Issue 2. DOI: https://doi.org/10.1002/2014GL061957
+- Buizert, Christo; Fudge, T.J.; Roberts, William H. G.; Steig, Eric J.; Sherriff-Tadano, Sam;
+  Ritz, Catherine; Lefebvre, Eric; Edwards, Jon; Kawamura, Kenji; Oyabu, Ikumi; Motoyama, Hideaki;
+  Kahle, Emma C.; Jones, Tyler R.; Abe-Ouchi, Ayako; Obase, Takashi; Martin, Carlos; Corr, Hugh;
+  Severinghaus, Jeffrey P.; Beaudette, Ross; Epifanio, Jenna; Brook, Edward J.; Martin, Kaden;
+  Chappellaz, Jérôme; Aoki, Shuji; Nakazawa, Takakiyo; Sowers, Todd A.; Alley, Richard; Ahn, Jinho;
+  Sigl, Michael; Severi, Mirko; Dunbar, Nelia W.; Svensson, Anders; Fegyveresi, John; He, Chengfei;
+  Liu, Zhengyu; Zhu, Jiang; Otto-Bliesner, Bette; Lipenkov, Vladimir Y.; Kameda, Takao; Schwander, Jakob
+  (2021): Antarctic surface temperature and elevation during the Last Glacial Maximum. In: Science, 372(6546),
+  1097-1101. DOI: 10.1126/science.abd2897
 - Friedrich Tobias & Timmermann Axel (2019): Using Late Pleistocene sea surface temperature
   reconstructions to constrain future greenhouse warming. In: Earth and Planetary Science
   Letters, 2020, Vol. 530. DOI: https://doi.org/10.1016/j.epsl.2019.115911
