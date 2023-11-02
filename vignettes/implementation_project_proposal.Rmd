@@ -1,0 +1,178 @@
+---
+title: "Implementation Project Proposal"
+author: "Patricia Gribi"
+date: "2023-10-02"
+output: html_document
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+
+# Data-Loading
+
+
+```{r}
+
+# reading co2 ice-core data
+
+co2_ice_cores <- read.csv("~./proseminar_geocomputation_patriciagribi/data/ice_cores_CO2_data.csv", header = TRUE, sep = ";")
+
+# reading co2 mauna-loa data
+
+start_line <- 37
+
+co2_mauna_loa <- read.csv("~./proseminar_geocomputation_patriciagribi/data/mauna_loa_co2_annmean.csv", skip = start_line, header = TRUE, sep = ",") 
+
+# reading temp pages2k data
+
+temp_pages2k <- read.table("~./proseminar_geocomputation_patriciagribi/data/temp_pages2k.txt", header = TRUE, sep = "\t")
+
+# reading temp antarctica data
+
+temp_antarctica <- read.table("~./proseminar_geocomputation_patriciagribi/data/temp_antarctica.txt", header = TRUE, sep = "\t")
+
+# reading temp NOAA data 
+
+start_line <- 4
+
+temp_NOAA_recentEra <- read.csv("~./proseminar_geocomputation_patriciagribi/data/temp_NOAA_1850-2022.csv", skip = start_line, header = TRUE, sep = ",")
+
+```
+
+
+# Display of the Different Datasets
+
+
+## CO2 Data from Ice Cores
+
+
+```{r}
+
+# generate a plot
+
+ic_co2_years <- co2_ice_cores[,1]
+
+ic_co2_values <- co2_ice_cores[,2]
+
+plot(ic_co2_years, ic_co2_values,
+     main = "CO2-Values over Time from Ice-Core Samples",
+     xlab = "year",
+     ylab = "CO2 in ppm",
+     col = "blue")
+
+```
+
+
+The first column of the ice-core-data is called "Gasage (yr BP)". The "Gas Age" indicates how many years ago the gas sample was trapped within the ice. "yr BP" (years before present): This part of the notation specifies the reference point in time. "BP" stands for "Before Present," and it is often used as a reference point in radiocarbon dating and other dating methods. "Present" is typically defined as the year 1950. So, "yr BP" represents the number of years before the year 1950 when the gas sample was trapped in the ice.
+
+The time axis in the plot is therefore represented in a special way. On the left is the present year and on the right is 800'000 years ago. So the time axis needs to be converted into a reader-friendly way, starting on the left at 800'000 years ago and lasting until present.
+
+This dataset enriches this project by providing a comprehensive timeline that extends far into the past. The long-ranging data allows conducting a more valuable analysis, enabling the observation and understanding of changes and trends over an extended time period. The dataset consists of different ice-core samples, gathered in Antarctica. The temporal resolution is annual. However, there are data gaps, which is also noted in the readme file of the dataset. To address this challenge, interpolation techniques will be exployed. The specific interpolation method has yet to be determined. There will be used several approaches and the one that presents the most favorable results will be implemented.
+
+
+## CO2 Data from Mauna Loa
+
+
+```{r}
+
+# generate a plot
+
+mau_co2_years <- co2_mauna_loa[,1]
+
+mau_co2_values <- co2_mauna_loa[,2]
+
+plot(mau_co2_years, mau_co2_values,
+     main = "CO2-Values over Time from the Mauna Loa Datasource",
+     xlab = "year",
+     ylab = "CO2 in ppm",
+     col = "purple")
+
+```
+
+
+The presented dataset already looks very clean, therefore no tidying of the data will be required.
+Within this dataset, CO2 records are plotted over time with an annual time resolution. The temporal scope, comparatively shorter to the ice-cores, lacks any data gaps indicating missing data. Furthermore the dataset contributes significantly to the project by offering globally averaged marine surface CO2 data, serving as an additional proxy. It provides a more precise portrayal of CO2 concentrations due to its relatively shorter time span and its aggregation of data from diverse geographical locations. Merging the mauna-loa with the ice-core records will allow an exploration of variations and disparities in CO2 patterns between these two distinct data sources.
+
+
+## Temperature Data pages2k
+
+
+```{r}
+
+# generate a plot
+
+p2k_years <- temp_pages2k[,1]
+
+p2k_temp_values <- temp_pages2k[,3]
+
+plot(p2k_years, p2k_temp_values,
+     main = "Temperature Changes of the Last 2'000 Years",
+     xlab = "year",
+     ylab = "temp. change",
+     col = "lightblue")
+
+```
+
+
+The plot above shows the dataset from the source of pages2k. In this dataset palaeoclimate
+proxy-based observations of temperature are available at a annual resolution. It ranges from 1 CE until 2017. The proxies are as well from different sites on the globe.
+
+At the moment only temperature changes are displayed. The next step will be to find out what the reference temperature is and then construct an absolute temperature timeline. This dataset will then be homogenised together with the following datasets.
+
+
+## Temperature Data Antarctica
+
+
+```{r}
+
+# generate a plot
+
+ant_temp_years <- temp_antarctica[,1]
+
+ant_temp_values <- temp_antarctica[,2]
+
+plot(ant_temp_years, ant_temp_values,
+     main = "Temperature Changes over Time from Ice Cores Samples",
+     xlab = "year",
+     ylab = "temp. change",
+     col = "lightgreen")
+
+```
+
+
+This dataset provides temperature records in degrees Celsius over a 40,000-year span, starting in 1950 and sourced from various Antarctic ice cores. The dataset's resolution is 40 years. Also here, interpolation to a annual resolution will be conducted. Additionally, the time axis will have to be adjusted from the past on the left to the present on the right side. The temperature is displayed in changes over a reference period. Therefore here as well an absolute temperature scale needs to be implemented. Overall this dataset is enriching to the project as it provides as well a long time-series, making able to compare the temperature trends with the homogenised CO2 time-line from the other datasets. 
+
+
+## Temperature Data NOAA 1850-2022
+
+
+```{r}
+
+NOAA_temp_years <- temp_NOAA_recentEra[,1]
+
+NOAA_temp_values <- temp_NOAA_recentEra[,2]
+
+plot(NOAA_temp_years, NOAA_temp_values,
+     main = "Temperature Anomalies of Global Land and Ocean Sites",
+     xlab = "year",
+     ylab = "temp. anomaly",
+     col = "orange")
+
+```
+
+
+This dataset provides temperature anomalies in degrees Celsius ranging from 1850 up until 2022. The measurements are from different sites. The dataset's resolution is one year. The only data wrangling here will be to display the temperature in absolute numbers and not in anomalies. This dataset is important for this project as it provides very recent temperature anomalies. It will make part of the homogenised time-line and offers a high resolution.
+
+
+## Final Project Visualisations
+
+These plots are very simple and serve as a first visualisation of the data. The goal of the project will be to show the homogenised time-line of CO2 and temperature data. The results will be presented as scatter-plots. Not just one but several plots will be made at different scaling. Scatter plots offer a visual and intuitive way to explore the relationships between two variables, making it easy to identify patterns, trends, and potential correlations in the data. They are particularly useful for revealing outliers and clusters within the data, which may not be evident in other types of graphs. 
+
+
+
+
+
+
+
+

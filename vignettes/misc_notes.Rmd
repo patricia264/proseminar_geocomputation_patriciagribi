@@ -1,0 +1,91 @@
+---
+title: "Notes"
+author: "Patricia Gribi"
+date: "2023-11-02"
+output: html_document
+---
+
+
+# Important links
+
+
+Temperature reconstruction over the last 2'000 years from diff. proxies and sites: 
+
+https://www.ncei.noaa.gov/access/paleo-search/study/26872
+
+# Datasources
+
+-   <https://www.ncei.noaa.gov/access/paleo-search/study/19743>
+
+-   RCP standard forcing: Representative Concentration Pathways (RCPs),
+    different regions and scenarios,
+    <https://tntcat.iiasa.ac.at/RcpDb/dsd?Action=htmlpage&page=download>
+
+
+# Papers
+
+-   Pleistocene sea surface temp. reconstructions:
+    <https://www.sciencedirect.com/science/article/abs/pii/S0012821X1930603X>
+    Our uncertainty analysis reveals further that the lack of robust
+    reconstructions of glacial aerosol forcing is a key contributor to
+    the overall uncertainty of paleo-based estimates of climate
+    sensitivity.The global-mean temperature reconstruction is typically
+    based on an average of local ocean and/or land temperatures derived
+    from different paleo-proxies. The accuracy of these
+    "paleothermometers" is uncertain. reconstructions very difficult
+    because proxies can be local or influenced by other parameters,
+    models on the other hand cannot take into consideration the earth
+    system as a whole and complexity is therefore largely restricted
+    (letzter Abschnitt introduction).
+
+radiative forcing: change in energy balance in the Earth's atmosphere
+due to various factors that influence the Earth's climate. It quantifies
+the impact of different drivers on the Earth's energy budget,
+specifically in terms of the incoming and outgoing energy fluxes.primary
+factors, that can cause radiative forcing: greenhouse gases, aerosols,
+land use changes, solar variability, stratospheric water vapor
+
+SST: sea surface temperature
+
+-   Identifying Signatures of Natural Climate Variability in Time Series
+    of Global-Mean Surface Temperature:distinction between anthropogenic
+    influences and natural variability of the climate (vulcanic
+    eruptions, el niño, marine air masses over high-latitude continents
+    in winter)
+
+-   Measuring Global Warming: very nice figures and well explained, FTS
+    model functional time series model, obtain forecasts for next twenty
+    years
+
+"temperature anomalies": differences btw. observed temp reading and the
+long-term average temp for each location and time
+
+# Data Exploration
+
+Explore the selected datasets to get a sense of the data's structure,
+variables, and quality. Check for any missing or erroneous data that may
+need to be cleaned.
+
+# Data Cleaning and Preprocessing
+
+Prepare the data for analysis by cleaning and transforming it as needed.
+This may include handling missing values, standardizing units, and
+merging datasets if multiple data sources are used.
+
+# Data Analysis and Visualization
+
+Apply statistical and data visualization techniques to analyze the data.
+Use appropriate tools and libraries (e.g., Python with libraries like
+pandas, matplotlib, and seaborn) to create visualizations that reveal
+patterns, relationships, trends, or differences.
+
+# Hypothesis Testing (if applicable):
+
+If your research question involves hypothesis testing, perform the
+necessary statistical tests to validate or reject your hypotheses.
+
+# Interpretation and Conclusion:
+
+Interpret the results of your analysis in the context of your research
+question. Discuss the implications and significance of your findings.
+Address what is known and what remains unknown in the field.
