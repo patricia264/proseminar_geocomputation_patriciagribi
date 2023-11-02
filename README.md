@@ -77,7 +77,7 @@ These variables will be conducted from different datasets and therefore differen
 The variables of interest (temperature and CO2) from the different datasets will then be combined
 together, forming a homogenised time-series from 800'000 years ago until the year 2'100. 
   
-Link to the implementation section: 
+Link to the implementation section: https://github.com/patricia264/proseminar_geocomputation_patriciagribi/blob/main/vignettes/implementation_project_proposal.Rmd
 
 
 ## Timeline
