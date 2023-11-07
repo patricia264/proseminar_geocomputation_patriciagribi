@@ -11,32 +11,34 @@ editor_options:
 
 # Data-Loading
 
+read.csv(paste0(here::here(), "/data/ice_cores_CO2_data.csv"), header = TRUE, sep = ";”)
+
 
 ```{r}
 
 # reading co2 ice-core data
 
-co2_ice_cores <- read.csv("~./proseminar_geocomputation_patriciagribi/data/ice_cores_CO2_data.csv", header = TRUE, sep = ";")
+co2_ice_cores <- read.csv(paste0(here::here(),"/data/ice_cores_CO2_data.csv"), header = TRUE, sep = ";")
 
 # reading co2 mauna-loa data
 
 start_line <- 37
 
-co2_mauna_loa <- read.csv("~./proseminar_geocomputation_patriciagribi/data/mauna_loa_co2_annmean.csv", skip = start_line, header = TRUE, sep = ",") 
+co2_mauna_loa <- read.csv(paste0(here::here(), "/data/mauna_loa_co2_annmean.csv"), skip = start_line, header = TRUE, sep = ",") 
 
 # reading temp pages2k data
 
-temp_pages2k <- read.table("~./proseminar_geocomputation_patriciagribi/data/temp_pages2k.txt", header = TRUE, sep = "\t")
+temp_pages2k <- read.table(paste0(here::here(), "/data/temp_pages2k.txt"), header = TRUE, sep = "\t")
 
 # reading temp antarctica data
 
-temp_antarctica <- read.table("~./proseminar_geocomputation_patriciagribi/data/temp_antarctica.txt", header = TRUE, sep = "\t")
+temp_antarctica <- read.table(paste0(here::here(), "/data/temp_antarctica.txt"), header = TRUE, sep = "\t")
 
 # reading temp NOAA data 
 
 start_line <- 4
 
-temp_NOAA_recentEra <- read.csv("~./proseminar_geocomputation_patriciagribi/data/temp_NOAA_1850-2022.csv", skip = start_line, header = TRUE, sep = ",")
+temp_NOAA_recentEra <- read.csv(paste0(here::here(), "/data/temp_NOAA_1850-2022.csv"), skip = start_line, header = TRUE, sep = ",")
 
 ```
 
