@@ -88,9 +88,7 @@ https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_
 ## Risks and contingency
 
 The primary challenge lies in ensuring data integrity, specifically in finding diverse datasets with 
-overlapping time series. As of now temperature data spans over 40,000 years, while CO2 data stretches 
-back to 800,000 years. This issue needs to be adressed first. Furthermroe integrating future modelled CO2 
-and temperature data into the timeline.
+overlapping time series. Furthermore integrating future modelled CO2 and temperature data into the timeline.
 
 Expected risks in this project include dealing with incomplete data. This
 issue will be adressed by interpolating missing data.
