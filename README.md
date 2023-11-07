@@ -80,7 +80,8 @@ Link to the implementation section: https://github.com/patricia264/proseminar_ge
 ## Timeline
 
 https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBkxnasJgvCWbkGVYxlrmnnQ?e=PJTBhH 
-![]([path/to/image.png](https://github.com/patricia264/proseminar_geocomputation_patriciagribi/blob/main/vignettes/project_timeline.png))
+
+[path/to/image.png](https://github.com/patricia264/proseminar_geocomputation_patriciagribi/blob/main/vignettes/project_timeline.png)
 
 ## Risks and contingency
 
