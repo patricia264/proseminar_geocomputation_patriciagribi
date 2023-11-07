@@ -43,14 +43,10 @@ topic of uncertainty and ongoing research in the field of climate science
 
 ## Objective
 
-The primary goal of this project is to homogenise and combine 3 different
-datasets together to form a time series of global mean CO2 and temperature data, 
-from the Pleistocene to the year 2100. 
-
-During the project the following questions should be answered: 
-
-- How does the homogenization of heterogeneous temperature and CO2 data impact the 
-accuracy and reliability of long-term climate change assessments?
+The objective of this project is to create a seamless and homogenised timeline that effectively portrays 
+historical temperature and CO2 variations. The primary goal is to answer how the homogenization of 
+heterogenous temperature and CO2 data impact the accuracy and reliability of long-term climate change
+assessments.
 
 
 ## Implementation
@@ -84,7 +80,7 @@ Link to the implementation section: https://github.com/patricia264/proseminar_ge
 ## Timeline
 
 https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBkxnasJgvCWbkGVYxlrmnnQ?e=PJTBhH 
-
+![](path/to/image.png)
 
 ## Risks and contingency
 
