@@ -61,6 +61,8 @@ These variables will be conducted from different datasets and therefore differen
 - Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]: Data of different ice cores ranging up until
   800'000 years ago. CO2 in ppm.
 
+- EPICA Dome C Ice Core 800KYr Deuterium Data and Temperature Estimates [Jouzel et al. 2007] 
+
 - Mauna Loa CO2 trends [Lan et al. 2023]: Globally averaged marine surface annual mean
   CO2 data, from 1979 until 2022, in ppm.
 
@@ -80,14 +82,13 @@ Link to the implementation section: https://github.com/patricia264/proseminar_ge
 ## Timeline
 
 https://unibe365-my.sharepoint.com/:x:/g/personal/patricia_gribi_students_unibe_ch/ETJs1lLq2fJKqt_G0AEYx_cBkxnasJgvCWbkGVYxlrmnnQ?e=PJTBhH 
-![](path/to/image.png)
+
+[path/to/image.png](https://github.com/patricia264/proseminar_geocomputation_patriciagribi/blob/main/vignettes/project_timeline.png)
 
 ## Risks and contingency
 
 The primary challenge lies in ensuring data integrity, specifically in finding diverse datasets with 
-overlapping time series. As of now temperature data spans over 40,000 years, while CO2 data stretches 
-back to 800,000 years. This issue needs to be adressed first. Furthermroe integrating future modelled CO2 
-and temperature data into the timeline.
+overlapping time series. Furthermore integrating future modelled CO2 and temperature data into the timeline.
 
 Expected risks in this project include dealing with incomplete data. This
 issue will be adressed by interpolating missing data.
@@ -133,6 +134,12 @@ to make people more concerned about this topic and may change some opinions abou
 - Farah Yasmeen (2019): Measuring Global Warming: Global and Hemisphere Mean Temperature
   Anomalies Predictions Using Sliced Functional Time Series (SFTS) Model. In: Open Journal
   of Applied Scienes, 2019, 9, 316-334. DOI: https://doi.org/10.4236/ojapps.2019.95026
+- Jouzel, J., V. Masson-Delmotte, O. Cattani, G. Dreyfus, S. Falourd, G. Hoffmann, B. Minster, J. Nouet,
+  J.M. Barnola, J. Chappellaz, H. Fischer, J.C. Gallet, S. Johnsen, M. Leuenberger, L. Loulergue, D. Luethi,
+  H. Oerter, F. Parrenin, G. Raisbeck, D. Raynaud, A. Schilt, J. Schwander, E. Selmo, R. Souchez, R. Spahni,
+  B. Stauffer, J.P. Steffensen, B. Stenni, T.F. Stocker, J.L. Tison, M. Werner, and E.W. Wolff (2007):
+  Orbital and Millennial Antarctic Climate Variability over the Past 800,000 Years. In: Science, Vol. 317,
+  No. 5839, pp.793-797, 10 August 2007.
 - Lan, X., Tans, P. and K.W. Thoning: Trends in globally-averaged CO2 determined from NOAA Global
   Monitoring Laboratory measurements. Version 2023-10. https://doi.org/10.15138/9N0H-ZH07
 - Neukom Raphael, Barboza Luis A., Erb Michael P., Shi Feng, Emile-Geay Julien, Evans Michael N.,
