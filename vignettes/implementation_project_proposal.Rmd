@@ -36,10 +36,7 @@ temp_antarctica <- read.table(paste0(here::here(), "/data/temp_antarctica.txt"),
 
 # reading temp ice core 800KYr data
 
-temp_800KYr <- read.table(paste0(here::here(), "/data/temp_800'000.txt"), sep = "\t", header = TRUE)
-
-
-temp_800KYr <- read.csv(paste0(here::here(), "/data/temp_800_000.csv"), sep = ";", header = FALSE)
+temp_800KYr <- read.csv(paste0(here::here(), "/data/temp_800_000.csv"), sep = "/", header = TRUE)
 
 # reading temp NOAA data 
 

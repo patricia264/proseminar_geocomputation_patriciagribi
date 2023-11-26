@@ -1,5 +1,5 @@
 ---
-title: "Implementation Project Proposal"
+title: "Data Wrangling"
 author: "Patricia Gribi"
 date: "2023-10-02"
 output: html_document
@@ -9,9 +9,7 @@ editor_options:
 ---
 
 
-# Data-Loading
-
-read.csv(paste0(here::here(), "/data/ice_cores_CO2_data.csv"), header = TRUE, sep = ";”)
+# Data-Reading
 
 
 ```{r}
@@ -26,20 +24,17 @@ start_line <- 40
 
 co2_mauna_loa <- read.csv(paste0(here::here(), "/data/co2_mm_mlo.csv"), skip = start_line, header = TRUE, sep = ",") 
 
-# reading temp pages2k data
+# reading temp ice core 800KYr data
 
-temp_pages2k <- read.table(paste0(here::here(), "/data/temp_pages2k.txt"), header = TRUE, sep = "\t")
+temp_800KYr <- read.csv(paste0(here::here(), "/data/temp_800_000.csv"), sep = "/", header = TRUE)
 
 # reading temp antarctica data
 
 temp_antarctica <- read.table(paste0(here::here(), "/data/temp_antarctica.txt"), header = TRUE, sep = "\t")
 
-# reading temp ice core 800KYr data
+# reading temp pages2k data
 
-temp_800KYr <- read.table(paste0(here::here(), "/data/temp_800'000.txt"), sep = "\t", header = TRUE)
-
-
-temp_800KYr <- read.csv(paste0(here::here(), "/data/temp_800_000.csv"), sep = ";", header = FALSE)
+temp_pages2k <- read.table(paste0(here::here(), "/data/temp_pages2k.txt"), header = TRUE, sep = "\t")
 
 # reading temp NOAA data 
 
@@ -50,133 +45,495 @@ temp_NOAA_recentEra <- read.csv(paste0(here::here(), "/data/temp_NOAA_1850-2022.
 ```
 
 
-# Display of the Different Datasets
-
-
-## CO2 Data from Ice Cores
+# Loading Libraries
 
 
 ```{r}
 
-# generate a plot
+library(tidyverse)
 
-ic_co2_years <- co2_ice_cores[,1]
+library(lubridate)
 
-ic_co2_values <- co2_ice_cores[,2]
+library(dplyr)
 
-plot(ic_co2_years, ic_co2_values,
-     main = "CO2-Values over Time from Ice-Core Samples",
-     xlab = "year",
-     ylab = "CO2 in ppm",
-     col = "blue")
+library(ggplot2)
 
 ```
 
 
-The first column of the ice-core-data is called "Gasage (yr BP)". The "Gas Age" indicates how many years ago the gas sample was trapped within the ice. "yr BP" (years before present): This part of the notation specifies the reference point in time. "BP" stands for "Before Present," and it is often used as a reference point in radiocarbon dating and other dating methods. "Present" is typically defined as the year 1950. So, "yr BP" represents the number of years before the year 1950 when the gas sample was trapped in the ice.
-
-The time axis in the plot is therefore represented in a special way. On the left is the present year and on the right is 800'000 years ago. So the time axis needs to be converted into a reader-friendly way, starting on the left at 800'000 years ago and lasting until present.
-
-This dataset enriches this project by providing a comprehensive timeline that extends far into the past. The long-ranging data allows conducting a more valuable analysis, enabling the observation and understanding of changes and trends over an extended time period. The dataset consists of different ice-core samples, gathered in Antarctica. The temporal resolution is annual. However, there are data gaps, which is also noted in the readme file of the dataset. To address this challenge, interpolation techniques will be exployed. The specific interpolation method has yet to be determined. There will be used several approaches and the one that presents the most favorable results will be implemented.
-
-
-## CO2 Data from Mauna Loa
+# Data Reduction
 
 
 ```{r}
 
-# generate a plot
+# select only needed columns of the data-frames
 
-mau_co2_years <- co2_mauna_loa[,1]
+# co2 data
 
-mau_co2_values <- co2_mauna_loa[,4]
+co2_ice_cores <- select(co2_ice_cores, Gasage..yr.BP., CO2..ppmv.)
 
-plot(mau_co2_years, mau_co2_values,
-     main = "CO2-Values over Time from the Mauna Loa Datasource",
-     xlab = "year",
-     ylab = "CO2 in ppm",
-     col = "purple")
+co2_mauna_loa <- select(co2_mauna_loa, year, month, average)
+
+# temp data
+
+temp_800KYr <- select(temp_800KYr, Age, Temperature)
+
+temp_antarctica <- select(temp_antarctica, age_yrBP1950, TS_EDC)
+
+temp_pages2k <- select(temp_pages2k, Year, Full.ensemble.median)
+
+temp_NOAA_recentEra <- select(temp_NOAA_recentEra, Year, Anomaly)
 
 ```
 
 
-The presented dataset already looks very clean. Within this dataset, CO2 records are plotted over time with a monthly time resolution. For this research project only a annual resolution is wanted. Therefore the monthly data will be aggregated to an annual resolution. The temporal scope, comparatively shorter to the ice-cores, lacks any data gaps indicating missing data. Furthermore the dataset contributes significantly to the project by offering atmospheric CO2 data, serving as an additional proxy. It provides a more precise portrayal of CO2 concentrations due to its relatively shorter time span. Merging the mauna-loa with the ice-core records will allow an exploration of variations and disparities in CO2 patterns between these two distinct data sources.
+# Format-Consistency
 
 
-## Temperature Data pages2k
+## Final Variables
+
+
+This research project aims to consistently represent the variables across all datasets with the following conventions:
+
+- Years: Represented as a continuous scale with decimal values.
+- CO2: Represented in parts per million (ppm).
+- Temperature (temp): Represented in degrees Celsius (°C).
+
+This standardization ensures clarity and consistency.
+
+
+## Format-Conversions
+
+
+### CO2 Ice Cores
+
+
+The first column of the ice-core-data is called "Gasage (yr BP)". The "Gas Age" indicates how many years ago the gas sample was trapped within the ice. "yr BP" represents the number of years before the year 1950. In order to display the age as gregorian calendar-format the time-scale needs to be converted as follows:
 
 
 ```{r}
 
-# generate a plot
+# convert years before present to gregorian calendar
 
-p2k_years <- temp_pages2k[,1]
-
-p2k_temp_values <- temp_pages2k[,3]
-
-plot(p2k_years, p2k_temp_values,
-     main = "Temperature Changes of the Last 2'000 Years",
-     xlab = "year",
-     ylab = "temp. change",
-     col = "lightblue")
+  for (i in seq_along(co2_ice_cores[,1])){
+    
+    # subtract 1950 from the data
+    co2_ice_cores[i,1] <- 1950 - as.numeric(co2_ice_cores[i,1])
+  }
 
 ```
 
 
-The plot above shows the dataset from the source of pages2k. In this dataset palaeoclimate
-proxy-based observations of temperature are available at a annual resolution. It ranges from 1 CE until 2017. The proxies are as well from different sites on the globe.
-
-At the moment only temperature changes are displayed. The next step will be to find out what the reference temperature is and then construct an absolute temperature timeline. This dataset will then be homogenised together with the following datasets.
+The implemented conversion facilitates the comparative analysis of the two distinct CO2 datasets, allowing a later composition of the two. The age of the ice cores is expressed in decimal values, reflecting the depth within the ice core. The leaving of the decimals is explained by the continuous nature of the time scale, signifying that these measurements correspond to specific points within a year.
 
 
-## Temperature Data Antarctica
+- CO2 (ppmv): The CO2 trapped in the ice-cores is displayed in ppmv (parts per million by volume)
+Conversion 2: convert ppmv in ppm
+
+To convert PPMV to PPM, one needs to divide the volume by the density of molecules.
+
+PPMV is denoted as mg/m³ (milligram per cubic meter)
+
+PPM is denoted as mg/L (milligram per liter).
+
+https://askanydifference.com/difference-between-ppm-and-ppmv-with-table/
+
+```{r}
+
+co2_col_ice_cores <- select(co2_ice_cores, CO2..ppmv.)
+
+co2_molecular_weight <- 44.01 #g/mol Source!!
+STP <- 22.4 # L/mol, molar volume of the gas at standard temperature and pressure Source!!
+
+for (i in seq_along(co2_col_ice_cores[,1])){
+  co2_col_ice_cores[i,1] <- (as.numeric(i) / 10^6) / (co2_molecular_weight/STP)
+}
+
+```
+
+
+### CO2 Mauna Loa
+
+
+In this dataset, the temporal information is already represented in the Gregorian calendar format, spanning from 1958 to 2023. Due to the dataset's monthly resolution, the co2-values have to be aggregated to a yearly scale. Furthermore the order has to be reorganized to commence with the most recent year (2023). The concentration of CO2 is expressed as a mole fraction, denoted in parts per million (ppm). Consequently, the dataset does not require any conversion of its variables.
 
 
 ```{r}
 
-# generate a plot
+# aggregate co2_mauna_loa to annual resolution and take average 
 
-ant_temp_years <- temp_antarctica[,1]
+co2_mauna_loa <- co2_mauna_loa |>
+  group_by(year) |>
+  summarise(average = mean(average))
 
-ant_temp_values <- temp_antarctica[,2]
+# reverse order of dataframe
 
-plot(ant_temp_years, ant_temp_values,
-     main = "Temperature Changes over Time from Ice Cores Samples",
-     xlab = "year",
-     ylab = "temp. change",
-     col = "lightgreen")
+co2_mauna_loa <- co2_mauna_loa %>% arrange(desc(co2_mauna_loa$year))
 
 ```
 
 
-This dataset provides temperature records in degrees Celsius over a 40,000-year span, starting in 1950 and sourced from various Antarctic ice cores. The dataset's resolution is 40 years. Also here, interpolation to a annual resolution will be conducted. Additionally, the time axis will have to be adjusted from the past on the left to the present on the right side. The temperature is displayed in changes over a reference period. Therefore here as well an absolute temperature scale needs to be implemented. Overall this dataset is enriching to the project as it provides as well a long time-series, making able to compare the temperature trends with the homogenised CO2 time-line from the other datasets. 
+### Temperature 800KYr
 
 
-## Temperature Data NOAA 1850-2022
+This dataset provides temperature records in degrees Celsius over a 800,000-year span. Like the co2-ice-core dataset the age is represented as years before present and therefore needs to be converted, in order to display the age as Gregorian calendar-format. Also here the age is expressed in decimal values.
 
 
 ```{r}
 
-NOAA_temp_years <- temp_NOAA_recentEra[,1]
+# convert years before present to gregorian calendar
 
-NOAA_temp_values <- temp_NOAA_recentEra[,2]
-
-plot(NOAA_temp_years, NOAA_temp_values,
-     main = "Temperature Anomalies of Global Land and Ocean Sites",
-     xlab = "year",
-     ylab = "temp. anomaly",
-     col = "orange")
+  for (i in seq_along(temp_800KYr[,1])){
+    
+    # subtract 1950 from the data
+    temp_800KYr[i,1] <- 1950 - as.numeric(temp_800KYr[i,1])
+  }
 
 ```
 
 
-This dataset provides temperature anomalies in degrees Celsius ranging from 1850 up until 2022. The measurements are from different sites. The dataset's resolution is one year. The only data wrangling here will be to display the temperature in absolute numbers and not in anomalies. This dataset is important for this project as it provides very recent temperature anomalies. It will make part of the homogenised time-line and offers a high resolution.
+The temperature is presented as a deviation from the mean observed over the past 1000 years. This value is 13.9°C. Accordingly, the current temperature value in the dataset is augmented by 13.9 to yield the adjusted representation.
 
 
-## Final Project Visualisations
+```{r}
 
-These plots are very simple and serve as a first visualisation of the data. The goal of the project will be to show the homogenised time-line of CO2 and temperature data. The results will be presented as scatter-plots. Not just one but several plots will be made at different scaling. Scatter plots offer a visual and intuitive way to explore the relationships between two variables, making it easy to identify patterns, trends, and potential correlations in the data. They are particularly useful for revealing outliers and clusters within the data, which may not be evident in other types of graphs. 
+# conversion to absolute temperature
 
+# reference temperature from 1901-2000 is 13.9°C
+
+reference_temp <- 13.9
+
+for (i in seq_along(temp_800KYr[,2])){
+ 
+    temp_800KYr[i,2] <- reference_temp + as.numeric(temp_800KYr[i,2])
+    
+}
+
+```
+
+
+### Temperature Antarctica
+
+ 
+Within this dataset, the temporal axis is described in years Before Present (BP), analogous to the temporal representation in the preceding datasets. Therefore the same conversion has been applied.
+
+
+```{r}
+
+# convert years before present to gregorian calendar
+
+  for (i in seq_along(temp_antarctica[,1])){
+    
+    # subtract 1950 from the data
+    temp_antarctica[i,1] <- 1950 - as.numeric(temp_antarctica[i,1])
+    
+  }
+
+```
+
+
+- TS_EDC: surface temperature in degree celsius, no conversion needed
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+### Temperature Pages2k
+
+
+The temporal scale in this dataset is structured in the desired format, obviating the necessity for any additional conversion. Concerning temperature values, they are presented as anomalies relative to the reference period spanning from 1961 to 1990, expressed in degrees Celsius. To align with the absolute reference value of 14°C, this constant value has been incrementally applied to each dataset-record.
+
+
+```{r}
+
+# conversion to absolute temperature
+
+# reference temperature from 1961-1990 is 14 degree Celsius
+
+reference_temp <- 14
+
+for (i in seq_along(temp_pages2k[,2])){
+ 
+    temp_pages2k[i,2] <- reference_temp + as.numeric(temp_pages2k[i,2])
+  
+}
+
+```
+
+
+### Temperature NOAA recent Era
+
+
+Again, the temporal scale in this dataset is structured in the desired format. No further conversions have to be conducted. The temperature values are displayed as anomalies. The absolute reference temperature, derived from the period spanning from 1901 to 2000 and quantified at 13.9°C, has been summed with each individual data record.
+
+
+```{r}
+
+# conversion to absolute temperature
+
+# reference temperature from 1901-2000 is 13.9°C
+
+reference_temp <- 13.9
+
+for (i in seq_along(temp_NOAA_recentEra[,2])){
+ 
+    temp_NOAA_recentEra[i,2] <- reference_temp + as.numeric(temp_NOAA_recentEra[i,2])
+    
+}
+
+```
+
+
+# Changing Column Names
+
+```{r}
+
+# co2 data
+
+colnames(co2_ice_cores) <- c("year", "co2")
+
+colnames(co2_mauna_loa)[2] <- "co2"
+
+# temp data
+
+colnames(temp_800KYr) <- c("year", "temp")
+
+colnames(temp_antarctica) <- c("year", "temp")
+
+colnames(temp_pages2k) <- c("year", "temp")
+
+colnames(temp_NOAA_recentEra) <- c("year", "temp")
+
+```
+
+
+# CO2-timeline
+
+## current Situation
+
+```{r}
+
+# plot of the two datasets
+
+ggplot() +
+  geom_line(data= co2_ice_cores, aes(x = year, y = co2, color = "Ice Cores"), size = 1) +
+  geom_line(data = co2_mauna_loa, aes(x = year, y = co2, color = "Mauna Loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(values = c("Ice Cores" = "black", "Mauna Loa" = "red"),
+                     name = "Datasources") +
+  xlim(1957, 2023) +
+  theme_minimal()
+
+```
+
+
+## Data-Correction and new Timeline
+
+
+by computing offset, interpolation... describe what you do
+
+
+```{r}
+
+# define overlapping period
+
+overlap_period <- c(1958,2001) # start and end of overlapping period
+
+#extract row where dataframe has certain value
+##################################################
+####################################################
+
+i_overlap_period <- filter(co2_ice_cores, year >= overlap_period[1] & year <= overlap_period[2]) 
+m_overlap_period <- filter(co2_mauna_loa, year >= overlap_period[1] & year <= overlap_period[2])
+
+# calculate the means of the two datasets over this period
+
+i_co2_mean <- mean(i_overlap_period$co2) # mean over overlapping period ice-cores
+m_co2_mean <- mean(m_overlap_period$co2) # mean over overlapping period mauna-loa
+
+# mean difference
+
+offset <- m_co2_mean - i_co2_mean
+
+# add offset to ice-core dataset
+
+
+for ( i in 1:50){
+  
+  co2_ice_cores[i,2] <- as.numeric(co2_ice_cores[i,2]) + offset
+  
+} 
+
+# plot of the corrected timeline consisting of the two datasets
+
+ggplot() +
+  geom_line(data= co2_ice_cores, aes(x = year, y = co2, color = "Ice Cores"), size = 1) +
+  geom_line(data = co2_mauna_loa, aes(x = year, y = co2, color = "Mauna Loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(values = c("Ice Cores" = "black", "Mauna Loa" = "red"),
+                     name = "Datasources") +
+  xlim(1958, 2023) +
+  theme_minimal()
+
+```
+
+
+```{r}
+
+# putting the two CO2-datasets together 
+
+co2_timeline <- merge(co2_mauna_loa, co2_ice_cores, by = "year", all = TRUE)
+
+# rename the columns
+
+colnames(co2_timeline) <- c("year", "co2_mauna_loa", "co2_ice_cores")
+
+# aggregate to one column with co2-values if one column has a NA then take the value of the other column
+# if both columns have values take the linear interpolation of the two points
+
+one_var_co2_timeline <- co2_timeline |>
+  mutate(aggregated_column = coalesce(co2_mauna_loa, co2_ice_cores))
+
+
+# non-continuous plot
+
+ggplot(data = co2_timeline) +
+  geom_line(aes(x = year, y = co2_ice_cores, color = "Ice-cores"), size = 1) +
+  geom_line(aes(x = year, y = co2_mauna_loa, color = "Mauna-loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(name = "Datasources", values = c("Ice-cores" = "black", "Mauna-loa" = "red")) +
+  xlim(1950, 2023) +
+  theme_minimal()
+
+
+# plot
+
+ggplot(data = one_var_co2_timeline) +
+  geom_line(aes(x = year, y = aggregated_column), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  xlim(1950, 2023) +
+  theme_minimal()
+
+```
+
+
+### Fancy Visualisations
+
+
+```{r}
+
+# libraries:
+library(ggplot2)
+library(gganimate)
+library(transformr)
+#library(hrbrthemes)
+
+transition_states <- seq(1950, 2023, by = 5)
+
+plot <- ggplot(data = co2_timeline) +
+  geom_line(aes(x = year, y = co2_ice_cores, color = "Ice Cores"), size = 1) +
+  geom_line(aes(x = year, y = co2_mauna_loa, color = "Mauna Loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(values = c("Ice Cores" = "black", "Mauna Loa" = "red"),
+                     name = "Datasources") +
+  xlim(1958, 2023) +
+  theme_minimal()+
+  transition_reveal(year)+
+  transition_states(transition_states, transition_length = 1, state_length = 1, wrap = FALSE)
+
+
+# Save at gif:
+anim_save("co2-animation.gif", animation = plot)
+
+
+```
+
+
+
+
+## Analysis
+
+- überlappende Periode der Datensätze herausfinden
+- means der beiden Datensätze ausrechnen
+- der zuverlässigere Datensatz auswählen und die Abweichung der beiden means
+beim verbleibenden Datensatz dazurechnen
+- änderungsraten analyse mit linear fit
+
+
+## Temperature timeline
+
+
+```{r}
+
+# putting the four temperature-datasets together 
+
+temp_timeline <- merge(temp_NOAA_recentEra, temp_pages2k, by = "year", all = TRUE)
+temp_timeline <- merge(temp_timeline, temp_antarctica, by = "year", all = TRUE )
+temp_timeline <- merge(temp_timeline, temp_800KYr, by = "year", all = TRUE )
+
+# rename the columns
+
+colnames(temp_timeline) <- c("year", "temp_NOAA_recentEra", "temp_pages2k", "temp_antarctica", "temp_800KYr")
+
+# plot whole temperature timeline
+
+ggplot(data = temp_timeline) +
+  geom_line(aes(x = year, y = temp_NOAA_recentEra, color = "Temp_NOAA_recentEra"), size = 1) +
+  geom_line(aes(x = year, y = temp_pages2k, color = "Temp_pages2k"), size = 1) +
+  geom_line(aes(x = year, y = temp_800KYr, color = "Temp_800KYr"), size = 1) +
+  labs(title = "Temperature Values Over Time",
+       x = "Year",
+       y = "Temperature in °C") +
+  scale_color_manual(name = "Datasources", values = c("Temp_NOAA_recentEra" = "lightblue", "Temp_pages2k" = "pink", "Temp_800KYr" = "lightgreen" )) +
+  theme_minimal()
+
+
+
+
+
+
+```
+
+
+
+```{r}
+
+# create subset of the dataframe for better visualizations of the overlapping sections
+
+overlap_temp_timeline <- temp_timeline[temp_timeline$year >= 1850 & co2_timeline$year <= 2002, ]
+
+# plot
+
+ggplot(data = overlap_temp_timeline) +
+  geom_line(aes(x = year, y = temp_NOAA_recentEra, color = "Temp_NOAA_recentEra"), size = 1) +
+  geom_line(aes(x = year, y = temp_pages2k, color = "Temp_pages2K"), size = 1) +
+  geom_line(aes(x = year, y = temp_800KYr, color = "Temp_800KYr"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(name = "Datasources", values = c("Temp_NOAA_recentEra" = "lightblue", "Temp_pages2K" = "pink", "Temp_800KYr" = "lightgreen")) +
+  theme_minimal()
+
+```
+
+
+# Citations
+
+
+Average temperature of 1901-2000
+https://www.ncei.noaa.gov/access/monitoring/monthly-report/global/202013#:~:text=The%201901%E2%80%932000%20average%20combined,C%20(60.9%C2%B0F).
+
+
+The average temperature over the period 1960-1990 was 14°C
+https://www.un.org/sustainabledevelopment/blog/2016/01/wmo-confirms-2015-as-hottest-year-on-record/#:~:text=WMO%20uses%201961%2D1990%20as,period%20was%2014%C2%B0C.
 
 
 
