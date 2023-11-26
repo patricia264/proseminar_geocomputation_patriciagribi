@@ -2,9 +2,11 @@
 title: "Data Wrangling"
 author: "Patricia Gribi"
 date: "2023-10-02"
-output: html_document
-editor_options: 
-  markdown: 
+output:
+  pdf_document: default
+  html_document: default
+editor_options:
+  markdown:
     wrap: 72
 ---
 
@@ -136,7 +138,10 @@ PPMV is denoted as mg/m³ (milligram per cubic meter)
 
 PPM is denoted as mg/L (milligram per liter).
 
-https://askanydifference.com/difference-between-ppm-and-ppmv-with-table/
+Source: https://askanydifference.com/difference-between-ppm-and-ppmv-with-table/
+
+
+*Frage*: Ist diese Umrechnung korrekt?
 
 ```{r}
 
@@ -232,7 +237,9 @@ Within this dataset, the temporal axis is described in years Before Present (BP)
 ```
 
 
-- TS_EDC: surface temperature in degree celsius, no conversion needed
+- TS_EDC: surface temperature in degree celsius, the values are too low because it's the
+temperature of the ice and not the reconstructed global temperature. How to convert? Or 
+just leave it?
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
@@ -330,7 +337,7 @@ ggplot() +
 ## Data-Correction and new Timeline
 
 
-by computing offset, interpolation... describe what you do
+by computing offset, interpolation... todo: write description, what I do and why
 
 
 ```{r}
@@ -339,7 +346,7 @@ by computing offset, interpolation... describe what you do
 
 overlap_period <- c(1958,2001) # start and end of overlapping period
 
-#extract row where dataframe has certain value
+#to do: extract row where dataframe has certain value, to later be able to generate a generic function
 ##################################################
 ####################################################
 
@@ -356,7 +363,6 @@ m_co2_mean <- mean(m_overlap_period$co2) # mean over overlapping period mauna-lo
 offset <- m_co2_mean - i_co2_mean
 
 # add offset to ice-core dataset
-
 
 for ( i in 1:50){
   
@@ -422,8 +428,15 @@ ggplot(data = one_var_co2_timeline) +
 
 ```
 
+*Frage*: Was mache ich nachdem ich den Offset gemacht habe? Ist ja nicht wirklich eine schöne Kurve.
+Mein Ziel ist eine oder mehrere schöne Visualisierungen und dann eine Analyse machen mit der Rate-of-Change (?)
+
+
+
 
 ### Fancy Visualisations
+
+(funktioniert noch nicht, will eine animierte Visualisierung machen evt.)
 
 
 ```{r}
@@ -445,18 +458,16 @@ plot <- ggplot(data = co2_timeline) +
   scale_color_manual(values = c("Ice Cores" = "black", "Mauna Loa" = "red"),
                      name = "Datasources") +
   xlim(1958, 2023) +
-  theme_minimal()+
-  transition_reveal(year)+
-  transition_states(transition_states, transition_length = 1, state_length = 1, wrap = FALSE)
+  theme_minimal()#+
+  #transition_reveal(year)+
+  #transition_states(transition_states, transition_length = 1, state_length = 1, wrap = FALSE)
 
 
 # Save at gif:
-anim_save("co2-animation.gif", animation = plot)
+#anim_save("co2-animation.gif", animation = plot)
 
 
 ```
-
-
 
 
 ## Analysis
@@ -467,6 +478,9 @@ anim_save("co2-animation.gif", animation = plot)
 beim verbleibenden Datensatz dazurechnen
 - änderungsraten analyse mit linear fit
 
+
+
+(ab hier nicht mehr lesen, wäre das Gleiche mit der Temperatur)
 
 ## Temperature timeline
 
