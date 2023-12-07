@@ -72,7 +72,228 @@ Prepare the data for analysis by cleaning and transforming it as needed.
 This may include handling missing values, standardizing units, and
 merging datasets if multiple data sources are used.
 
+
+
+```{r}
+# reading temp antarctica data
+
+temp_antarctica <- read.table(paste0(here::here(), "/data/temp_antarctica.txt"), header = TRUE, sep = "\t")
+
+
+temp_antarctica <- select(temp_antarctica, age_yrBP1950, TS_EDC)
+
+```
+
+
+To convert PPMV to PPM, one needs to divide the volume by the density of
+molecules.
+
+PPMV is denoted as mg/m³ (milligram per cubic meter)
+
+PPM is denoted as mg/L (milligram per liter).
+
+Source:
+<https://askanydifference.com/difference-between-ppm-and-ppmv-with-table/>
+
+```{r}
+
+
+co2_col_ice_cores <- select(co2_ice_cores, CO2..ppmv.)
+
+co2_density <- 1.87 # kg/m3
+
+
+#co2_molecular_weight <- 44.01 #g/mol Source!!
+#STP <- 22.4 # L/mol, molar volume of the gas at standard temperature and pressure Source!!
+#density <- co2_molecular_weight * STP
+
+for (i in seq_along(co2_col_ice_cores[,1])){
+  co2_col_ice_cores[i,1] <- (as.numeric(i) * 10^6 * co2_density)
+}
+
+```
+
+
+
+
+### Temperature Antarctica
+
+Within this dataset, the temporal axis is described in years Before
+Present (BP), analogous to the temporal representation in the preceding
+datasets. Therefore the same conversion has been applied.
+
+
+```{r}
+
+# convert years before present to gregorian calendar
+
+  for (i in seq_along(temp_antarctica[,1])){
+    
+    # subtract 1950 from the data
+    temp_antarctica[i,1] <- 1950 - as.numeric(temp_antarctica[i,1])
+    
+  }
+
+```
+
+-   TS_EDC: surface temperature in degree celsius, the values are too
+    low because it's the temperature of the ice and not the
+    reconstructed global temperature. How to convert? Or just leave it?
+    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+
+
 # Data Analysis and Visualization
+
+```{r}
+
+# putting the two CO2-datasets together 
+
+co2_timeline <- merge(co2_mauna_loa, co2_ice_cores, by = "year", all = TRUE)
+
+# rename the columns
+
+colnames(co2_timeline) <- c("year", "co2_mauna_loa", "co2_ice_cores")
+
+# aggregate to one column with co2-values if one column has a NA then take the value of the other column
+# if both columns have values take the linear interpolation of the two points
+
+one_var_co2_timeline <- co2_timeline |>
+  mutate(aggregated_column = coalesce(co2_mauna_loa, co2_ice_cores))
+
+
+# non-continuous plot
+
+ggplot(data = co2_timeline) +
+  geom_line(aes(x = year, y = co2_ice_cores, color = "Ice-cores"), size = 1) +
+  geom_line(aes(x = year, y = co2_mauna_loa, color = "Mauna-loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(name = "Datasources", values = c("Ice-cores" = "black", "Mauna-loa" = "red")) +
+  xlim(1950, 2023) +
+  theme_minimal()
+
+
+
+```
+
+
+```{r}
+
+# putting the four temperature-datasets together 
+
+temp_timeline <- merge(temp_NOAA_recentEra, temp_pages2k, by = "year", all = TRUE)
+temp_timeline <- merge(temp_timeline, temp_antarctica, by = "year", all = TRUE )
+temp_timeline <- merge(temp_timeline, temp_800KYr, by = "year", all = TRUE )
+
+# rename the columns
+
+colnames(temp_timeline) <- c("year", "temp_NOAA_recentEra", "temp_pages2k", "temp_antarctica", "temp_800KYr")
+
+# plot whole temperature timeline
+
+ggplot(data = temp_timeline) +
+  geom_line(aes(x = year, y = temp_NOAA_recentEra, color = "Temp_NOAA_recentEra"), size = 1) +
+  geom_line(aes(x = year, y = temp_pages2k, color = "Temp_pages2k"), size = 1) +
+  geom_line(aes(x = year, y = temp_800KYr, color = "Temp_800KYr"), size = 1) +
+  labs(title = "Temperature Values Over Time",
+       x = "Year",
+       y = "Temperature in °C") +
+  scale_color_manual(name = "Datasources", values = c("Temp_NOAA_recentEra" = "lightblue", "Temp_pages2k" = "pink", "Temp_800KYr" = "lightgreen" )) +
+  theme_minimal()
+
+```
+
+
+### Fancy Visualisations
+
+(funktioniert noch nicht, will eine animierte Visualisierung machen
+evt.)
+
+```{r}
+
+# libraries:
+library(ggplot2)
+library(gganimate)
+library(transformr)
+#library(hrbrthemes)
+
+transition_states <- seq(1950, 2023, by = 5)
+
+plot <- ggplot(data = co2_timeline) +
+  geom_line(aes(x = year, y = co2_ice_cores, color = "Ice Cores"), size = 1) +
+  geom_line(aes(x = year, y = co2_mauna_loa, color = "Mauna Loa"), size = 1) +
+  labs(title = "CO2 Values Over Time",
+       x = "Year",
+       y = "CO2 Concentration in ppm") +
+  scale_color_manual(values = c("Ice Cores" = "black", "Mauna Loa" = "red"),
+                     name = "Datasources") +
+  xlim(1958, 2023) +
+  theme_minimal()#+
+  #transition_reveal(year)+
+  #transition_states(transition_states, transition_length = 1, state_length = 1, wrap = FALSE)
+
+
+# Save at gif:
+#anim_save("co2-animation.gif", animation = plot)
+
+
+```
+
+
+```{r}
+
+# create subsets of the overlapping period of co2_ice_cores and co2_mauna_loa datasets
+
+overlap_period <- c(1958,2001) # start and end of overlapping period
+
+subset_mauna_loa <- co2_mauna_loa[co2_mauna_loa$year <= 2001,]
+
+subset_ice_cores <- co2_ice_cores[co2_ice_cores$year >= 1958,]
+
+# aggregate subset to yearly resolution
+
+agg_subset_ice_cores <- subset_ice_cores %>%
+  group_by(year = substr(year, 1, 4)) %>%
+  summarize(co2 = mean(co2))
+
+# calculate the means of both subsets
+
+mean_mauna_loa <- mean(subset_mauna_loa$co2)
+
+mean_ice_cores <- mean(agg_subset_ice_cores$co2)
+
+
+# calculate the means of both subsets (with same amount of datapoints, not yearly resolution)
+
+merged_dataset <- merge(subset_mauna_loa, agg_subset_ice_cores, by = "year", all = TRUE)
+subset_df <- merged_dataset[complete.cases(merged_dataset), ]
+colnames(subset_df) <- c("year", "mauna-loa", "ice-cores")
+mean_m <- mean(subset_df$`mauna-loa`)
+mean_i <- mean(subset_df$`ice-cores`)
+
+# interpolation of ice-cores dataset?
+
+
+
+# calculate the offset
+
+offset <- mean_mauna_loa - mean_ice_cores
+offset <- mean_m - mean_i
+
+# make a t-test to see if means have a significant difference
+
+t_test_result <- t.test(subset_mauna_loa$co2, agg_subset_ice_cores$co2)
+
+t_test_result <- t.test(subset_df$`mauna-loa`, subset_df$`ice-cores`)
+
+
+print(t_test_result)
+
+```
+
 
 Apply statistical and data visualization techniques to analyze the data.
 Use appropriate tools and libraries (e.g., Python with libraries like
