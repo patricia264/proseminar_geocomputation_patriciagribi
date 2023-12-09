@@ -10,19 +10,32 @@ editor_options:
     wrap: 72
 ---
 
-
 # Introduction
 
-Gives the background, explains the relevance, and motivates the (research) question. The introduction may also motivate the methodological approach, but doesn’t give its details.
+Gives the background, explains the relevance, and motivates the
+(research) question. The introduction may also motivate the
+methodological approach, but doesn't give its details.
 
+Background: Briefly introduce the broader context of your project.
+Highlight the significance of studying the relationship between CO2 and
+temperature data. Motivation: Clearly state the research question or
+objective. Explain why investigating this question is important.
 
+# Methods and Data
 
+Data Description: Detail the characteristics of the data used (scale,
+source, format). Discuss any preprocessing steps undertaken.
+Methodological Approach: Briefly mention the overall approach without
+going into detailed methods. Save the methodological details for a later
+section.
 
 # Data Wrangling
 
-## Data-Reading
+## Overview
 
-```{r, collapse = TRUE}
+## Data-Reading & Loading Libraries
+
+```{r, collapse = TRUE, message = FALSE}
 
 # reading co2 ice-core data
 
@@ -48,12 +61,7 @@ start_line <- 4
 
 temp_NOAA_recentEra <- read.csv(paste0(here::here(), "/data/temp_NOAA_1850-2022.csv"), skip = start_line, header = TRUE, sep = ",")
 
-```
-
-
-# Loading Libraries
-
-```{r, message = FALSE, collapse = TRUE}
+# loading needed libraries
 
 library(tidyverse)
 
@@ -67,7 +75,9 @@ library(scales)
 
 ```
 
-# Data Reduction
+## Data Cleaning
+
+### Data Reduction
 
 ```{r, collapse = TRUE}
 
@@ -89,31 +99,29 @@ temp_NOAA_recentEra <- select(temp_NOAA_recentEra, Year, Anomaly)
 
 ```
 
-# Format-Consistency
-
-## Final Variables
+### Format-Consistency
 
 This research project aims to consistently represent the variables
 across all datasets with the following conventions:
 
--   Years: Represented as a continuous scale with or without decimal values.
--   CO2: Represented in parts per million (ppm).
--   Temperature (temp): Represented in degrees Celsius (°C).
+-   **Years:** Represented as a continuous scale with or without decimal
+    values.
+-   **CO2:** Represented in parts per million **(ppm)**.
+-   **Temperature (temp):** Represented in degrees Celsius **(°C)**.
 
-This standardization ensures clarity and consistency.
+This standardization of variables enables to construction of a clear and
+consistent timeline.
 
-
-## Format-Conversions
-
-### CO2 Ice Cores
+**CO2-Ice-Cores Dataset**
 
 The first column of the ice-core-data is called "Gasage (yr BP)". The
 "Gas Age" indicates how many years ago the gas sample was trapped within
 the ice. "yr BP" represents the number of years before the year 1950. In
-order to display the age as gregorian calendar-format the time-scale
-needs to be converted as follows:
+order to display the age as gregorian calendar format the time-scale
+needed to be converted. This was done by subtracting each row of the
+dataframe from 1950.
 
-```{r}
+```{r, collapse= TRUE}
 
 # convert years before present to gregorian calendar
 
@@ -125,26 +133,31 @@ needs to be converted as follows:
 
 ```
 
-The implemented conversion facilitates the comparative analysis of the
-two distinct CO2 datasets, allowing a later composition of the two. The
-age of the ice cores is expressed in decimal values, reflecting the
-depth within the ice core. The leaving of the decimals is explained by
-the continuous nature of the time scale, signifying that these
-measurements correspond to specific points within a year.
+The implemented conversion facilitates a comparative analysis of
+distinct datasets. It will allow as well a later composition of the two
+CO2-datasets.
 
-The CO2 trapped in the ice-cores is displayed in ppm (parts per million) and 
-needs no conversion. 
+The age of the ice cores is expressed in decimal values, which reflects
+the depth within the ice core. The retention of the decimals is
+explained by the continuous nature of the time scale, signifying that
+these measurements correspond to specific points within a year.
+
+The CO2 trapped in the ice-cores is displayed in ppm (parts per million)
+and was therefore in no need for conversion.
 
 
-### CO2 Mauna Loa
+**CO2-Mauna-Loa Dataset**
 
 In this dataset, the temporal information is already represented in the
-Gregorian calendar format, spanning from 1958 to 2023. Due to the
-dataset's monthly resolution, the co2-values have to be aggregated to a
-yearly scale. Furthermore the order has to be reorganized to commence
-with the most recent year (2023). The concentration of CO2 is expressed
-as a mole fraction, denoted in parts per million (ppm). Consequently,
-the dataset does not require any conversion of its variables.
+Gregorian-calendar format, spanning from 1958 to 2023. Due to the
+dataset's monthly resolution, the co2-values had to be aggregated to a
+yearly scale. Furthermore the order had to be reorganized to begin with
+the most recent year (2023).
+
+The concentration of CO2 is expressed as a mole fraction, denoted in
+parts per million (ppm). Consequently, the dataset did not require any
+conversion of its variables.
+
 
 ```{r}
 
@@ -160,15 +173,18 @@ co2_mauna_loa <- co2_mauna_loa %>% arrange(desc(co2_mauna_loa$year))
 
 ```
 
-### Temperature 800KYr
+
+**Temp-800KYr Dataset**
 
 This dataset provides temperature records in degrees Celsius over a
 800,000-year span. Like the co2-ice-core dataset the age is represented
-as years before present and therefore needs to be converted, in order to
-display the age as Gregorian calendar-format. Also here the age is
-expressed in decimal values.
+as years before present and therefore needed to be converted, in order
+to display the age as Gregorian calendar-format.
 
-```{r}
+The age in this dataset is expressed too with decimal values.
+
+
+```{r, collapse=TRUE}
 
 # convert years before present to gregorian calendar
 
@@ -180,16 +196,14 @@ expressed in decimal values.
 
 ```
 
+
 The temperature is presented as a deviation from the mean observed over
-the past 1000 years. This value is 13.8°C . Accordingly, the current
-temperature value in the dataset is augmented by 13.8 to yield the
-adjusted representation.
+the past 1000 years. This corresponds to an absolute value of 13.8°C
+(Quelle). Accordingly, the current temperature value in the dataset was
+augmented by 13.8 to yield the adjusted representation.
+
 
 ```{r}
-
-# take this dataset and compute the mean temperature from year 1000 to 2000
-
-average_temp <- mean(temp_800KYr[1:142, 2])
 
 # conversion to absolute temperature
 
@@ -205,15 +219,17 @@ for (i in seq_along(temp_800KYr[,2])){
 
 ```
 
-### Temperature Pages2k
+
+**Temp-Pages2k**
 
 The temporal scale in this dataset is structured in the desired format,
-obviating the necessity for any additional conversion. Concerning
-temperature values, they are presented as anomalies relative to the
+leaving the necessity of any additional conversion.
+
+The temperature values, are presented as anomalies relative to the
 reference period spanning from 1961 to 1990, expressed in degrees
-Celsius. To align with the absolute reference value of 14°C, this
-constant value has been incrementally applied to each dataset-record.
-Quelle!
+Celsius. To align with the absolute reference value of 14°C (Quelle),
+this constant value has been incrementally applied to each
+dataset-record.
 
 ```{r}
 
@@ -231,13 +247,16 @@ for (i in seq_along(temp_pages2k[,2])){
 
 ```
 
-### Temperature NOAA recent Era
+
+**Temp-NOAA-recent-Era Dataset**
 
 Again, the temporal scale in this dataset is structured in the desired
-format. No further conversions have to be conducted. The temperature
-values are displayed as anomalies. The absolute reference temperature,
-derived from the period spanning from 1901 to 2000 and quantified at
-13.9°C, has been summed with each individual data record. Quelle!
+format. No further conversions had to be conducted.
+
+The temperature values are displayed as anomalies. The absolute
+reference temperature, derived from the period spanning from 1901 to
+2000 quantified at 13.9°C (Quelle), has been summed with each data
+record.
 
 ```{r}
 
@@ -255,7 +274,9 @@ for (i in seq_along(temp_NOAA_recentEra[,2])){
 
 ```
 
-# Changing Column Names
+
+### Renaming of Variables
+
 
 ```{r}
 
@@ -275,9 +296,14 @@ colnames(temp_NOAA_recentEra) <- c("year", "temp")
 
 ```
 
-# CO2-timeline
 
-## Current Situation
+## Construction of the CO2-timeline
+
+
+In order to construct the co2-timeline out of the 2 provided datasets, the focus
+has first been laid on the overlapping section. The plot below shows the 
+overlapping period, where both, co2-ice-core and co2-mauna-loa, data are available.
+
 
 ```{r, warning = FALSE}
 
@@ -286,7 +312,7 @@ colnames(temp_NOAA_recentEra) <- c("year", "temp")
 ggplot() +
   geom_line(data= co2_ice_cores, aes(x = year, y = co2, color = "Ice Cores"), size = 1) +
   geom_line(data = co2_mauna_loa, aes(x = year, y = co2, color = "Mauna Loa"), size = 1) +
-  labs(title = "CO2 Values Over Time",
+  labs(title = "Overlapping Section of the co2-datasets",
        x = "Year",
        y = "CO2 Concentration in ppm") +
   scale_color_manual(values = c("Ice Cores" = "cornflowerblue", "Mauna Loa" = "coral"),
@@ -297,24 +323,27 @@ ggplot() +
 
 ```
 
-Description:
 
-The two datasets have a relatively consistent correspondence. The Ice Cores dataset 
-contains stronger fluctuations, depicting fewer data points surpassing those of the 
-Mauna Loa dataset. Around the year 1980, the Ice Cores dataset consistently registers 
-lower concentrations of carbon dioxide (CO2) in comparison to the Mauna Loa dataset. Moreover, 
-a intersection with the Mauna Loa dataset does not happpen anymore. 
+**Description:**
+
+The two datasets have a relatively consistent correspondence. The co2-ice-cores 
+dataset contains stronger fluctuations, depicting fewer data points surpassing 
+those of the co2-mauna-loa dataset. Around the year 1980, the co2-ice-cores 
+dataset consistently registers lower concentrations of carbon dioxide (CO2) in 
+comparison to the co2-mauna-loa dataset. Moreover, a intersection does not 
+happen anymore.
 
 
-Analysis:
+**Analysis:**
 
 In the following, the overlap period of the two data sets is taken and
 the means of the two data sets are compared. Since the ice-core data set
-does not have a consistent annual resolution like the Mauna-Loa data set, it was
-was first aggregated to an annual resolution and then used to calculate the mean.
+does not have a consistent annual resolution like the Mauna-Loa data
+set, it was was first aggregated to an annual resolution and then used
+to calculate the mean.
 
 
-Diskussion:
+**Diskussion:**
 
 Der Mauna-Loa besitzt eine konstante Auflösung, nämlich eine jährliche.
 Der ice-Cores Datensatz hingegen weist manchmal mehrjährige Lücken auf,
@@ -338,8 +367,11 @@ die CO2-Zeitreihe aus den 2 Datensätzen zusammengesetzt. Ab dem
 Daten vorgezogen.
 
 
-There are huge data-gaps:    
-    
+
+
+
+There are huge data-gaps:
+
 ```{r}
 
 # check for gaps larger than 10 years
@@ -359,12 +391,11 @@ if (no_large_gaps) {
 
 ```
 
-Um eine höhere Auflösung des Datensatzes zu gewährleisten und weniger starke Fluktuationen der Daten zu erhalten
-werden die Werte interpoliert.
-
+Um eine höhere Auflösung des Datensatzes zu gewährleisten und weniger
+starke Fluktuationen der Daten zu erhalten werden die Werte
+interpoliert.
 
 Interpolate
-
 
 ```{r}
 
@@ -388,7 +419,6 @@ interpolated_df$co2 <- approx(x = agg_ice_cores$year, y = agg_ice_cores$co2, xou
 
 ```
 
-
 Plot der Überlappungsperiode mit dem interpolierten Datensatz
 
 ```{r, warning = FALSE}
@@ -408,9 +438,10 @@ ggplot() +
   theme_minimal()
 
 ```
+
 mean ausrechnen vor oder nach der Interpolation?
 
-Offset 
+Offset
 
 ```{r}
 
@@ -440,8 +471,8 @@ print(t_test_result)
 
 ```
 
-Fragen: Was tun: gekürzte Variante mit gleich vielen Datenpunkten mean rechnen oder ice-cores auf jährliche Auflösung interpolieren?
-
+Fragen: Was tun: gekürzte Variante mit gleich vielen Datenpunkten mean
+rechnen oder ice-cores auf jährliche Auflösung interpolieren?
 
 t-test was conducted to see if there is a significant difference in the
 means between the two datasets. the nullhypothesis in this case would be
@@ -450,7 +481,6 @@ p-value (0.675) it becomes obvious that the nullhypothesis must be
 accepted and cannot be rejected. therefore the two datasets show no
 significant difference regarding their means. This leads to the
 conclusion, that no offset will be added to the ice-core-dataset.
-
 
 Construct the timeline
 
@@ -483,15 +513,12 @@ ggplot(data = co2_timeline) +
 
 ```
 
-
 ## Analysis
 
 -   änderungsraten analyse mit linear fit (Analyse: Werte interpolieren
     um mehr zu haben und schauen wie sich die Temperaturkurve
     verändert?)
-    
 
-    
 ```{r}
 
 # Berechnung des linearen Trends
@@ -508,11 +535,6 @@ ggplot(interpolated_df, aes(x = year, y = co2)) +
   geom_smooth(method = "lm", se = FALSE, color = "red")  # lineare Regression einfügen
 
 ```
-
-    
-    
-    
-    
 
 # Temperature timeline
 
