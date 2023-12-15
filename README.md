@@ -10,9 +10,6 @@ cleaned and described. In a further step the datasets will be combined together 
 timeline. This will require the homogenisation of the different datasets, considering offsets on 
 overlapping intervalls and the interpolation of missing datapoints. 
 
-The final step will be to take different models for a predicted scenario and then use ensemble techniques, 
-to combine the various models and smooth out the predictive results.
-
 A further analysis could focus on the rates of change between temperature and CO2 over different time-windows. 
 It would be also possible to determine a simple sensitivity.
 
