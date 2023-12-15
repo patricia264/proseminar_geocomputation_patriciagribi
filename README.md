@@ -41,9 +41,8 @@ topic of uncertainty and ongoing research in the field of climate science
 ## Objective
 
 The objective of this project is to create a seamless and homogenised timeline that effectively portrays 
-historical temperature and CO2 variations. The primary goal is to answer how the homogenization of 
-heterogenous temperature and CO2 data impact the accuracy and reliability of long-term climate change
-assessments.
+historical temperature and CO2 variations. The primary goal is to answer what steps need to be taken to
+construct a time-series and how the rate of change looks like.
 
 
 ## Implementation
