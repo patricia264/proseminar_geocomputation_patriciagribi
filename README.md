@@ -50,10 +50,6 @@ construct a time-series and how the rate of change looks like.
 For the following project, the variables of interest are temperature and CO2 over time.
 These variables will be conducted from different datasets and therefore different sources:
 
-- Antarctic surface temperature and elevation during the Last Glacial Maximum [Buizert et al. 2021]:
-  Temperature and elevation reconstructions for 7 Antarctic ice core locations for the past 40,000 years,
-  based on Antarctic ice core borehole temperature and d15N.
-
 - Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]: Data of different ice cores ranging up until
   800'000 years ago. CO2 in ppm.
 
