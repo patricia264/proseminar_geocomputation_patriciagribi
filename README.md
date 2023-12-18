@@ -10,9 +10,6 @@ cleaned and described. In a further step the datasets will be combined together 
 timeline. This will require the homogenisation of the different datasets, considering offsets on 
 overlapping intervalls and the interpolation of missing datapoints. 
 
-The final step will be to take different models for a predicted scenario and then use ensemble techniques, 
-to combine the various models and smooth out the predictive results.
-
 A further analysis could focus on the rates of change between temperature and CO2 over different time-windows. 
 It would be also possible to determine a simple sensitivity.
 
@@ -44,19 +41,14 @@ topic of uncertainty and ongoing research in the field of climate science
 ## Objective
 
 The objective of this project is to create a seamless and homogenised timeline that effectively portrays 
-historical temperature and CO2 variations. The primary goal is to answer how the homogenization of 
-heterogenous temperature and CO2 data impact the accuracy and reliability of long-term climate change
-assessments.
+historical temperature and CO2 variations. The primary goal is to answer what steps need to be taken to
+construct a time-series and how the rate of change looks like.
 
 
 ## Implementation
 
 For the following project, the variables of interest are temperature and CO2 over time.
 These variables will be conducted from different datasets and therefore different sources:
-
-- Antarctic surface temperature and elevation during the Last Glacial Maximum [Buizert et al. 2021]:
-  Temperature and elevation reconstructions for 7 Antarctic ice core locations for the past 40,000 years,
-  based on Antarctic ice core borehole temperature and d15N.
 
 - Corrected EPICA Dome C CO2 record [Bereiter et al. 2015]: Data of different ice cores ranging up until
   800'000 years ago. CO2 in ppm.
