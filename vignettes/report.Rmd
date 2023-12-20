@@ -811,7 +811,7 @@ if (no_large_gaps) {
 
 ```
 
-```{r}
+```{r, echo=FALSE}
 
 for (i in seq_along(temp_800KYr[,1])){
     
